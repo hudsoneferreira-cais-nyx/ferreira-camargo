@@ -1,0 +1,10 @@
+{
+  "name": "ferreira-camargo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Painel financeiro Ferreira Camargo — lê o Excel do Google Drive e atualiza o dashboard.",
+  "dependencies": {
+    "googleapis": "^144.0.0",
+    "xlsx": "^0.18.5"
+  }
+}

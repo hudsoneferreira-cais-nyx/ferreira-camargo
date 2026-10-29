@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>*{box-sizing:border-box}html,body{margin:0;padding:0}body{font-family:system-ui}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Painel Ferreira Camargo</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: bento "widgets Apple" claro, vidro fosco sobre paisagem, preenchendo a tela. Seletor Família/Hudson/Anne. Tema claro único. */
+:root{
+  --ink:#1b2430; --muted:#5d6b7a; --faint:#8a97a6; --line:rgba(27,36,48,.09);
+  --glass:rgba(255,255,255,.66); --dark:#0e0f14;
+  --azul:#3b5bdb; --roxo:#7c6cf5; --cian:#2bc4e0; --laranja:#f97316; --verde:#17b26a; --rosa:#f43f6e; --amarelo:#f5b400;
+  color-scheme:light;
+  --dsp:"Plus Jakarta Sans",system-ui,sans-serif; --script:"Dancing Script",cursive;
+}
+*{box-sizing:border-box}
+body{min-height:100vh; font-family:var(--dsp); color:var(--ink); -webkit-font-smoothing:antialiased;
+  background:
+    radial-gradient(900px 400px at 72% 2%, rgba(255,255,255,.55), transparent 60%),
+    linear-gradient(180deg,#a9cbec 0%,#bcd6ec 34%,#cfe1da 52%,#a9c489 72%,#8aad64 100%) fixed;}
+.wrap{max-width:1520px; margin:0 auto; min-height:100vh; display:flex; flex-direction:column;
+  padding-block:18px; padding-left:max(18px,env(safe-area-inset-left,0px)); padding-right:max(18px,env(safe-area-inset-right,0px));}
+h1,h2,h3{font-weight:700; margin:0; letter-spacing:-.01em;}
+.mv,.tnum{font-variant-numeric:tabular-nums;}
+
+/* top bar */
+.topbar{display:flex; align-items:center; gap:14px; justify-content:space-between; margin-bottom:14px; flex-wrap:wrap;}
+.logo{display:flex; align-items:center; gap:11px; min-width:0;}
+.logo .mark{width:34px; height:34px; border-radius:10px; background:linear-gradient(135deg,var(--roxo),var(--azul)); flex:none;
+  display:grid; place-items:center; color:#fff; font-weight:800; font-size:.95rem; box-shadow:0 6px 16px -6px var(--azul);}
+.logo .t{line-height:1.15;} .logo .t b{font-size:1.02rem;} .logo .t span{font-size:.74rem; color:var(--muted); display:block;}
+.pill{display:flex; align-items:center; gap:12px; background:var(--glass); backdrop-filter:blur(14px) saturate(1.3);
+  border:1px solid rgba(255,255,255,.6); border-radius:16px; padding:11px 20px; box-shadow:0 8px 26px rgba(31,45,61,.12);}
+.pill .ic{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--verde),var(--cian));flex:none}
+.pill .l{font-size:.78rem;color:var(--muted)} .pill .v{font-size:1.25rem;font-weight:800;letter-spacing:-.02em}
+.notif{display:flex; gap:11px; align-items:flex-start; background:rgba(255,255,255,.5); backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.55); border-radius:16px; padding:11px 15px; max-width:340px;}
+.notif .nic{width:26px;height:26px;border-radius:7px;background:var(--rosa);flex:none;display:grid;place-items:center;color:#fff}
+.notif b{font-size:.82rem} .notif p{margin:3px 0 0; font-size:.76rem; color:var(--muted); line-height:1.4}
+
+/* seletor de visão */
+.viewsel{display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap;}
+.viewsel button{flex:1; min-width:120px; display:flex; align-items:center; gap:11px; cursor:pointer; font-family:inherit;
+  background:var(--glass); backdrop-filter:blur(14px) saturate(1.3); border:1px solid rgba(255,255,255,.6);
+  border-radius:16px; padding:11px 16px; box-shadow:0 8px 22px rgba(31,45,61,.1); transition:.16s; color:var(--ink);}
+.viewsel button .av{width:34px;height:34px;border-radius:50%;flex:none;display:grid;place-items:center;color:#fff;font-weight:800;font-size:1rem}
+.viewsel button .vt{text-align:left;line-height:1.15} .viewsel button .vt b{font-size:.95rem} .viewsel button .vt span{font-size:.72rem;color:var(--muted);display:block}
+.viewsel button[aria-pressed="true"]{border-color:transparent; box-shadow:0 10px 26px -8px var(--azul); outline:2px solid var(--azul);}
+.viewsel button:focus-visible{outline:2px solid var(--azul); outline-offset:2px;}
+
+/* bento */
+.bento{display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); grid-auto-rows:minmax(132px,auto);
+  grid-auto-flow:row dense; gap:15px; flex:1;}
+.tile{grid-column:span 3; background:var(--glass); backdrop-filter:blur(16px) saturate(1.3);
+  border:1px solid rgba(255,255,255,.6); border-radius:26px; padding:20px; min-width:0; position:relative; overflow:hidden;
+  box-shadow:0 10px 32px rgba(31,45,61,.13); display:flex; flex-direction:column;}
+.r2{grid-row:span 2;}
+.c2{grid-column:span 2}.c3{grid-column:span 3}.c4{grid-column:span 4}.c5{grid-column:span 5}.c6{grid-column:span 6}
+.th{font-size:.82rem; color:var(--muted); font-weight:600;}
+.push{margin-top:auto;}
+.tbig{font-size:clamp(1.5rem,2.6vw,2.15rem); font-weight:800; letter-spacing:-.03em; line-height:1;}
+
+@media(max-width:1100px){ .wrap{min-height:0} .c2{grid-column:span 4} .c3{grid-column:span 4} .c4{grid-column:span 6} .c5,.c6{grid-column:span 12} .tile{grid-column:span 4} }
+@media(max-width:620px){ .tile,.c2,.c3,.c4,.c5,.c6{grid-column:span 12 !important} .r2{grid-row:span 1} .viewsel button{min-width:0} }
+
+.hero-net{color:#fff; border:none;}
+.hero-net .th{color:rgba(255,255,255,.85)}
+.hero-net::after{content:""; position:absolute; right:-40px; top:-40px; width:150px; height:150px; border-radius:50%; background:radial-gradient(circle,rgba(255,255,255,.3),transparent 70%);}
+.dark{background:var(--dark); color:#fff; border:none;}
+.dark .th{color:rgba(255,255,255,.6)}
+.watch-date{font-size:.8rem;color:rgba(255,255,255,.7)} .watch-big{font-size:1.9rem;font-weight:800;letter-spacing:-.02em;margin:2px 0}
+.watch-sub{font-size:.72rem;color:rgba(255,255,255,.5);margin-top:auto}
+.avatar{display:flex;flex-direction:column;align-items:center;gap:10px;justify-content:center;text-align:center}
+.av-circ{width:62px;height:62px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;font-size:1.5rem;box-shadow:0 8px 20px -6px rgba(0,0,0,.3)}
+.av-name{font-family:var(--script);font-size:1.7rem;font-weight:700;line-height:1;color:var(--ink)}
+.av-sub{font-size:.74rem;color:var(--muted)}
+.delta{font-size:.78rem;font-weight:700;display:inline-flex;align-items:center;gap:4px;margin-top:10px}
+
+.exp{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--line)}
+.exp:last-child{border-bottom:0}
+.exp .ei{width:40px;height:40px;border-radius:12px;flex:none;display:grid;place-items:center;color:#fff}
+.exp .en{flex:1;min-width:0} .exp .en b{font-size:.98rem;font-weight:700} .exp .en span{font-size:.75rem;color:var(--muted);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.exp .ep{font-size:.8rem;color:var(--muted);background:rgba(27,36,48,.05);border-radius:999px;padding:5px 11px;font-weight:600;flex:none}
+.spark{margin-top:auto;padding-top:10px}
+.goalbar{display:flex;height:9px;border-radius:999px;overflow:hidden;background:rgba(27,36,48,.08);margin:14px 0 10px}
+.goalbar i{display:block;height:100%}
+.gli{display:flex;justify-content:space-between;font-size:.78rem;color:var(--muted)} .gli b{color:var(--ink)}
+.mini{display:flex;align-items:center;gap:12px}
+.mini .mi{width:46px;height:46px;border-radius:14px;flex:none;display:grid;place-items:center;color:#fff}
+.mini .ml{font-size:.76rem;color:var(--muted)} .mini .mvv{font-size:1.35rem;font-weight:800;letter-spacing:-.02em}
+.monthgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.monthgrid button{font-size:.92rem;font-weight:700;color:var(--muted);background:rgba(27,36,48,.04);border:1px solid transparent;border-radius:12px;padding:12px 8px;cursor:pointer;font-family:inherit;transition:.15s}
+.monthgrid button.on{color:#fff;background:linear-gradient(135deg,var(--azul),var(--roxo));box-shadow:0 6px 16px -6px var(--azul)}
+.monthgrid button:focus-visible{outline:2px solid var(--azul);outline-offset:2px}
+.festa{background:linear-gradient(140deg,#f472b6 0%,#a855f7 55%,#6366f1 100%);color:#fff;border:none}
+.festa .th{color:rgba(255,255,255,.85)} .festa .big{font-size:2.4rem;font-weight:800;line-height:1}
+.aniv-list{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;margin-top:12px}
+.aniv-list .al b{font-size:1.2rem;font-weight:800;display:block} .aniv-list .al span{font-size:.74rem;color:var(--muted)}
+.tip{position:fixed;pointer-events:none;z-index:50;background:#0e0f14;color:#fff;border-radius:9px;padding:7px 10px;font-size:.76rem;opacity:0;transition:opacity .12s;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+svg{display:block;max-width:100%}
+.banner{position:sticky;top:0;z-index:30;max-width:1520px;margin:8px auto 0;padding:11px 16px;border-radius:12px;font-size:.85rem;font-weight:600}
+.banner.err{background:#fdecec;color:#b42318;border:1px solid #f3c0bd}
+.loginwrap{position:fixed;inset:0;z-index:60;background:rgba(10,20,35,.55);backdrop-filter:blur(6px);display:grid;place-items:center}
+.loginbox{background:#fff;border-radius:22px;padding:28px;width:min(340px,90vw);box-shadow:0 20px 60px rgba(0,0,0,.3);display:flex;flex-direction:column;gap:12px;text-align:center}
+.loginttl{font-weight:800;font-size:1.3rem;color:#1b2430}
+.loginsub{font-size:.82rem;color:#5d6b7a;margin-top:-6px}
+.loginbox input{padding:12px 14px;border:1px solid #d8dee6;border-radius:12px;font-size:1rem;font-family:inherit}
+.loginbox button{padding:12px;border:none;border-radius:12px;background:linear-gradient(135deg,#3b5bdb,#7c6cf5);color:#fff;font-weight:700;font-size:1rem;cursor:pointer;font-family:inherit}
+.loginmsg{font-size:.8rem;color:#b42318;min-height:1em}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Dancing+Script:wght@600;700&display=swap">
+
+</head>
+<body>
+<div id="banner" class="banner" hidden></div>
+<div id="login" class="loginwrap" hidden>
+  <div class="loginbox">
+    <div class="loginttl">Ferreira Camargo</div>
+    <div class="loginsub">Acesso da família</div>
+    <input id="senha" type="password" placeholder="senha" autocomplete="current-password">
+    <button id="loginbtn">Entrar</button>
+    <div id="loginmsg" class="loginmsg"></div>
+  </div>
+</div>
+<div class="wrap">
+  <div class="topbar">
+    <div class="logo"><div class="mark">FC</div><div class="t"><b>Ferreira Camargo</b><span>Painel Financeiro da Família</span></div></div>
+    <div class="pill"><div class="ic"></div><div><div class="l">Disponível em caixa</div><div class="v mv" id="pBalance"></div></div></div>
+    <div class="notif"><div class="nic">!</div><div><b id="nTitle"></b><p id="nText"></p></div></div>
+  </div>
+  <div class="viewsel" id="viewsel"></div>
+  <div class="bento" id="grid"></div>
+</div>
+<div class="tip" id="tip"></div>
+
+<script>
+/* ===================================================================
+   FONTE DE DADOS — ponto único de troca.
+   Hoje: dados embutidos (gerados do Excel Ferreira_Camargo.xlsx).
+   No deploy (Vercel): trocar por  return (await fetch('/api/dados')).json();
+=================================================================== */
+const DADOS_EMBUTIDOS = {"financeiro":{"meses":[{"rotulo":"Outubro","visoes":{"hudson":{"entradas":[{"motivo":"Salario","valor":3166.15},{"motivo":"Tio carlos","valor":732.0}],"saidas":[{"motivo":"Creche","valor":350.0,"tipo":"casa"},{"motivo":"Aluguel","valor":423.81,"tipo":"casa"},{"motivo":"Celular","valor":31.0,"tipo":"casa"},{"motivo":"cartao anne/renner","valor":518.12,"tipo":"cartao"},{"motivo":"cartao neon","valor":1763.0,"tipo":"cartao"}],"total_entradas":3898.15,"total_saidas":3085.93,"sobra":812.22},"anne":{"entradas":[{"motivo":"Salario","valor":3563.35},{"motivo":"Alexandre","valor":100.0}],"saidas":[{"motivo":"Creche","valor":350.0,"tipo":"casa"},{"motivo":"Aluguel","valor":423.81,"tipo":"casa"},{"motivo":"Celular","valor":31.0,"tipo":"casa"},{"motivo":"renner","valor":83.5,"tipo":"cartao"},{"motivo":"cartão","valor":1551.0,"tipo":"cartao"}],"total_entradas":3663.35,"total_saidas":2439.31,"sobra":1224.04},"familia":{"entradas":[{"motivo":"Salario · Hudson","valor":3166.15},{"motivo":"Tio carlos","valor":732.0},{"motivo":"Salario · Anne","valor":3563.35},{"motivo":"Alexandre","valor":100.0}],"saidas":[{"motivo":"Creche","valor":700.0,"tipo":"casa"},{"motivo":"Aluguel","valor":847.61,"tipo":"casa"},{"motivo":"Celular","valor":62.0,"tipo":"casa"},{"motivo":"cartao anne/renner · H","valor":518.12,"tipo":"cartao"},{"motivo":"cartao neon · H","valor":1763.0,"tipo":"cartao"},{"motivo":"renner · A","valor":83.5,"tipo":"cartao"},{"motivo":"cartão · A","valor":1551.0,"tipo":"cartao"}],"total_entradas":7561.5,"total_saidas":5525.23,"sobra":2036.27}}},{"rotulo":"Novembro","visoes":{"hudson":{"entradas":[{"motivo":"Salario","valor":3166.15},{"motivo":"Tio carlos","valor":732.0}],"saidas":[{"motivo":"Creche","valor":350.0,"tipo":"casa"},{"motivo":"Aluguel","valor":423.81,"tipo":"casa"},{"motivo":"Celular","valor":31.0,"tipo":"casa"},{"motivo":"cartao anne/renner","valor":468.09,"tipo":"cartao"},{"motivo":"cartao neon","valor":255.12,"tipo":"cartao"}],"total_entradas":3898.15,"total_saidas":1528.02,"sobra":2370.13},"anne":{"entradas":[{"motivo":"Salario","valor":3563.35},{"motivo":"Alexandre","valor":100.0}],"saidas":[{"motivo":"Creche","valor":350.0,"tipo":"casa"},{"motivo":"Aluguel","valor":423.81,"tipo":"casa"},{"motivo":"Celular","valor":31.0,"tipo":"casa"},{"motivo":"renner","valor":58.65,"tipo":"cartao"},{"motivo":"cartão","valor":404.0,"tipo":"cartao"}],"total_entradas":3663.35,"total_saidas":1267.46,"sobra":2395.89},"familia":{"entradas":[{"motivo":"Salario · Hudson","valor":3166.15},{"motivo":"Tio carlos","valor":732.0},{"motivo":"Salario · Anne","valor":3563.35},{"motivo":"Alexandre","valor":100.0}],"saidas":[{"motivo":"Creche","valor":700.0,"tipo":"casa"},{"motivo":"Aluguel","valor":847.61,"tipo":"casa"},{"motivo":"Celular","valor":62.0,"tipo":"casa"},{"motivo":"cartao anne/renner · H","valor":468.09,"tipo":"cartao"},{"motivo":"cartao neon · H","valor":255.12,"tipo":"cartao"},{"motivo":"renner · A","valor":58.65,"tipo":"cartao"},{"motivo":"cartão · A","valor":404.0,"tipo":"cartao"}],"total_entradas":7561.5,"total_saidas":2795.47,"sobra":4766.03}}}],"regra_casa":"metade"},"aniversario":{"itens":[{"item":"Local da Festa (DCL Festa)","valor":650.0,"pago":200.0,"falta":450.0},{"item":"Brinquedos (GOFun)","valor":255.0,"pago":130.0,"falta":125.0},{"item":"Ornamentação","valor":880.0,"pago":240.0,"falta":640.0},{"item":"Fotografa","valor":910.0,"pago":364.0,"falta":546.0},{"item":"Bolo","valor":450.0,"pago":215.0,"falta":235.0},{"item":"Comida","valor":1100.0,"pago":0,"falta":1100.0},{"item":"Bebida","valor":400.0,"pago":0,"falta":400.0},{"item":"Toalha","valor":112.5,"pago":56.25,"falta":56.25},{"item":"Docinho","valor":255.0,"pago":0,"falta":255.0},{"item":"Maquigem","valor":295.0,"pago":30.0,"falta":265.0},{"item":"Doces Personalizados","valor":211.5,"pago":111.5,"falta":100.0},{"item":"sapato  maitê","valor":91.0,"pago":91.0,"falta":0.0},{"item":"estação de crepe","valor":540.0,"pago":540.0,"falta":0.0}],"orcado":6150.0,"pago":1977.75,"falta":4172.25,"falta_comprar":[{"item":"kit descartavel 180","valor":38.39},{"item":"vela do bolo","valor":48.9},{"item":"acessorios anne","valor":30.97},{"item":"flores","valor":70.0},{"item":"display","valor":70.0},{"item":"bolo foto","valor":75.0},{"item":"balao de gas helio","valor":75.0}],"extra_pendente":408.26,"lembrancinhas":["Potinho de jujuba","Copinho e garrafinhas","95.25"],"caixa":{"tenho_conta":3177,"a_entrar":900,"total_disponivel":4077},"comida":[{"item":"MINI X-BURGUERpão de batata, maionese, carne e queijo","total":172.0},{"item":"MINI HAMBÚRGUERpão de batata, maionese, carne e alface R","total":172.0},{"item":"MINI PIZZAmassa de pizza, molho de tomate, presunto, queijo ","total":132.0},{"item":"PÃO ITALIANO recheado com mousse de provolone e acompanha to","total":129.8},{"item":"SAL - LOMBO CANADENSE lombo canadense, queijo, maionese, alf","total":127.8},{"item":"MINI QUICHE (queijo/palmito/bacon/alho poró)","total":148.0},{"item":"MINI PASTEL FRITO(frango/carne/queijo/pizza)","total":72.0},{"item":"MINI PASTEL ASSADO(frango/ricota)","total":72.0},{"item":"MINI CROISSANT (presunto/frango/calabresa/ricota/peito de pe","total":125.8}],"total_comida":1151.4,"convidados_total":136,"n_adultos_lista":112,"n_criancas":24}};
+// ---------- Sincronização com o backend (Google Drive) ----------
+const LS='fc_snapshot_v1';
+let SYNC={em:null, origem:'inicial', erro:null};
+function salvarSnap(dados,em){try{localStorage.setItem(LS,JSON.stringify({dados,em}));}catch(e){}}
+function lerSnap(){try{const s=JSON.parse(localStorage.getItem(LS)||'null');return (s&&s.dados)?s:null;}catch(e){return null;}}
+async function carregarDados(){
+  const snap=lerSnap();
+  if(snap){ D=snap.dados; SYNC.em=snap.em; SYNC.origem='cache'; }
+  else { D=DADOS_EMBUTIDOS; SYNC.origem='inicial'; }
+  return D;
+}
+async function sincronizar(){
+  try{
+    const r=await fetch('/api/dados',{headers:{'accept':'application/json'},cache:'no-store'});
+    if(r.status===401){ mostrarLogin(true); return; }
+    mostrarLogin(false);
+    const j=await r.json();
+    if(j.ok && j.dados){ D=j.dados; SYNC.em=j.sincronizado_em||new Date().toISOString(); SYNC.origem='drive'; SYNC.erro=null; salvarSnap(D,SYNC.em); }
+    else { SYNC.erro=(j.erros&&j.erros[0])||'planilha inválida ou incompatível'; }
+  }catch(e){ SYNC.erro='sem conexão com o servidor'; }
+  repintar();
+}
+function repintar(){ if(!D)return; topo(); viewsel(); render(); banner(); }
+function banner(){
+  const b=document.getElementById('banner'); if(!b)return;
+  if(SYNC.erro){ b.hidden=false; b.className='banner err';
+    b.textContent='⚠ Sincronização falhou ('+SYNC.erro+'). Mostrando os últimos dados válidos.'; }
+  else b.hidden=true;
+}
+function mostrarLogin(v){ const l=document.getElementById('login'); if(l) l.hidden=!v; }
+async function fazerLogin(){
+  const i=document.getElementById('senha'), msg=document.getElementById('loginmsg');
+  try{ const r=await fetch('/api/login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({senha:i.value})});
+    if(r.ok){ mostrarLogin(false); sincronizar(); } else { msg.textContent='Senha incorreta.'; } }
+  catch(e){ msg.textContent='Erro ao entrar.'; }
+}
+
+const BRL=n=>(n<0?'-':'')+'R$ '+Math.abs(n).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const BRL0=n=>'R$ '+Math.round(n).toLocaleString('pt-BR');
+const $=s=>document.querySelector(s);
+const el=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;};
+const tip=$('#tip');
+const showTip=(ev,h)=>{tip.innerHTML=h;tip.style.opacity='1';tip.style.left=Math.min(ev.clientX+14,innerWidth-tip.offsetWidth-10)+'px';tip.style.top=(ev.clientY+14)+'px';};
+const hideTip=()=>tip.style.opacity='0';
+const ICON={casa:'<path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9h14v-9"/>',bebe:'<circle cx="12" cy="7" r="3"/><path d="M5 20c0-4 3-6 7-6s7 2 7 6"/>',cartao:'<rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/>',fone:'<rect x="6" y="4" width="12" height="16" rx="2"/><path d="M10 18h4"/>',dinheiro:'<rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/>'};
+const sic=(p,c)=>`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="${c||'#fff'}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+const catColor=m=>/alug|casa/i.test(m)?'var(--azul)':/creche/i.test(m)?'var(--rosa)':/cart/i.test(m)?'var(--roxo)':/celular/i.test(m)?'var(--cian)':'var(--laranja)';
+const catIcon=m=>/alug|casa/i.test(m)?ICON.casa:/creche/i.test(m)?ICON.bebe:/cart/i.test(m)?ICON.cartao:/celular/i.test(m)?ICON.fone:ICON.dinheiro;
+
+const PESSOAS={
+  familia:{nome:'Família',sub:'Hudson + Anne + Maitê',ini:'FC',grad:'linear-gradient(135deg,#7c6cf5,#38bdf8)',hero:'linear-gradient(135deg,#8b7cf6 0%,#5574f3 52%,#38bdf8 100%)'},
+  hudson:{nome:'Hudson',sub:'metade das contas da casa',ini:'H',grad:'linear-gradient(135deg,#3b5bdb,#2bc4e0)',hero:'linear-gradient(135deg,#3b5bdb 0%,#2b6ef3 55%,#2bc4e0 100%)'},
+  anne:{nome:'Anne',sub:'metade das contas da casa',ini:'A',grad:'linear-gradient(135deg,#f472b6,#a855f7)',hero:'linear-gradient(135deg,#f472b6 0%,#c348d6 55%,#a855f7 100%)'}
+};
+
+let D, mesSel, visao='familia';
+document.getElementById('loginbtn').addEventListener('click',fazerLogin);
+document.getElementById('senha').addEventListener('keydown',e=>{if(e.key==='Enter')fazerLogin();});
+init();
+async function init(){
+  await carregarDados(); mesSel=D.financeiro.meses.length-1; repintar();
+  sincronizar();                                   // verifica ao abrir
+  setInterval(sincronizar, 60000);                 // e periodicamente
+  addEventListener('visibilitychange',()=>{ if(!document.hidden) sincronizar(); });
+}
+
+function topo(){
+  const a=D.aniversario;
+  $('#pBalance').textContent=BRL0(a.caixa.total_disponivel);
+  const abertos=a.itens.filter(i=>i.falta>0).length;
+  $('#nTitle').textContent=`Faltam ${BRL0(a.falta)} no aniversário`;
+  $('#nText').textContent=`${abertos} itens em aberto + ${BRL0(a.extra_pendente)} em compras avulsas.`;
+}
+
+function viewsel(){
+  const vs=$('#viewsel'); vs.innerHTML='';
+  ['familia','hudson','anne'].forEach(k=>{const p=PESSOAS[k];
+    const b=el('button',null,`<span class="av" style="background:${p.grad}">${p.ini}</span>
+      <span class="vt"><b>${p.nome}</b><span>${k==='familia'?'visão consolidada':'individual'}</span></span>`);
+    b.setAttribute('aria-pressed',k===visao);
+    b.onclick=()=>{visao=k; viewsel(); render();}; vs.append(b);});
+}
+
+function spark(vals,color,w=150,h=46){
+  const max=Math.max(...vals),min=Math.min(...vals),rng=(max-min)||1;
+  const X=i=>vals.length<2?w/2:i/(vals.length-1)*w, Y=v=>h-4-((v-min)/rng)*(h-8);
+  let d=''; vals.forEach((v,i)=>d+=(i?'L':'M')+X(i).toFixed(1)+' '+Y(v).toFixed(1));
+  return `<svg class="spark" viewBox="0 0 ${w} ${h}" width="100%" height="${h}"><path d="${d}" fill="none" stroke="${color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="${X(vals.length-1)}" cy="${Y(vals[vals.length-1])}" r="3.5" fill="${color}"/></svg>`;
+}
+function donut(parts){
+  const tot=parts.reduce((a,b)=>a+b.val,0),r=52,c=2*Math.PI*r,W=132; let off=0,seg='';
+  parts.forEach(p=>{const len=c*p.val/tot;
+    seg+=`<circle cx="${W/2}" cy="${W/2}" r="${r}" fill="none" stroke="${p.color}" stroke-width="13" stroke-dasharray="${Math.max(len-3,0)} ${c-Math.max(len-3,0)}" stroke-dashoffset="${-off}" stroke-linecap="round" transform="rotate(-90 ${W/2} ${W/2})"/>`; off+=len;});
+  return `<svg viewBox="0 0 ${W} ${W}" width="128" height="128">${seg}
+    <text x="${W/2}" y="${W/2-2}" text-anchor="middle" font-size="12" fill="var(--muted)">entradas</text>
+    <text x="${W/2}" y="${W/2+15}" text-anchor="middle" font-size="16" font-weight="800" fill="var(--ink)" font-family="var(--dsp)">${BRL0(tot)}</text></svg>`;
+}
+
+function render(){
+  const g=$('#grid'); g.innerHTML=''; const meses=D.financeiro.meses, m=meses[mesSel], a=D.aniversario;
+  const v=m.visoes[visao], P=PESSOAS[visao];
+  const serieEnt=meses.map(x=>x.visoes[visao].total_entradas), serieSai=meses.map(x=>x.visoes[visao].total_saidas);
+  const outroMes=meses[mesSel===0?1:0];
+  const outro=outroMes?outroMes.visoes[visao]:null;
+  const outroRot=outroMes?outroMes.rotulo:'';
+  const dSobra=outro?v.sobra-outro.sobra:0;
+
+  // 1. HERO sobra
+  const t1=el('div','tile hero-net c3 r2'); t1.style.background=P.hero;
+  t1.innerHTML=`<div class="th">Sobra · ${P.nome} · ${m.rotulo}</div>
+    <div class="push"><div class="tbig tnum">${BRL(v.sobra)}</div>
+    <div style="font-size:.8rem;color:rgba(255,255,255,.82);margin-top:10px">Entradas ${BRL0(v.total_entradas)} − Saídas ${BRL0(v.total_saidas)}</div>
+    ${outro?`<div class="delta" style="color:#fff">${dSobra>=0?'▲':'▼'} ${BRL0(Math.abs(dSobra))} vs ${outroRot}</div>`:''}</div>`;
+  g.append(t1);
+
+  // 2-3. saídas / entradas sparkline
+  g.append(el('div','tile c2',`<div class="th">Saídas</div><div class="tbig tnum" style="color:var(--rosa)">${BRL0(v.total_saidas)}</div>${spark(serieSai,'#f43f6e')}`));
+  g.append(el('div','tile c2',`<div class="th">Entradas</div><div class="tbig tnum" style="color:var(--verde)">${BRL0(v.total_entradas)}</div>${spark(serieEnt,'#17b26a')}`));
+
+  // 4. maiores saídas
+  const t4=el('div','tile c5 r2'); t4.innerHTML=`<h2 style="font-size:1rem;margin-bottom:12px">Maiores saídas · ${P.nome} · ${m.rotulo}</h2>`;
+  [...v.saidas].sort((x,y)=>y.valor-x.valor).slice(0,6).forEach(s=>{const pc=Math.round(s.valor/v.total_saidas*100);
+    t4.append(el('div','exp',`<div class="ei" style="background:${catColor(s.motivo)}">${sic(catIcon(s.motivo))}</div>
+      <div class="en"><b>${BRL(s.valor)}</b><span>${s.motivo}${s.tipo==='casa'&&visao!=='familia'?' (½)':''}</span></div><div class="ep">${pc}%</div>`));});
+  g.append(t4);
+
+  // 5. watch — última sincronização bem-sucedida (não o relógio do navegador)
+  const sdt = SYNC.em ? new Date(SYNC.em) : null;
+  const wdia = sdt ? sdt.toLocaleDateString('pt-BR',{weekday:'long'}) : '—';
+  const wdata = sdt ? sdt.toLocaleDateString('pt-BR',{day:'2-digit',month:'long'}) : 'sem sync';
+  const whora = sdt ? sdt.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}) : '';
+  const worg = SYNC.origem==='drive'?'sincronizado do Drive':(SYNC.origem==='cache'?'último salvo neste aparelho':'dados iniciais');
+  g.append(el('div','tile dark c2',`<div class="watch-date">${wdata}</div><div class="watch-big" style="text-transform:capitalize">${wdia}</div><div class="watch-big tnum">${whora}</div><div class="watch-sub">${worg}</div>`));
+
+  // 6. avatar (reflete visão)
+  g.append(el('div','tile c2 avatar',`<div class="av-circ" style="background:${P.grad}">${P.ini}</div>
+    <div><div class="av-name">${P.nome}</div><div class="av-sub">${P.sub}</div></div>`));
+
+  // 7. mês
+  const t7=el('div','tile c4'); t7.innerHTML=`<div class="th">Mês</div><div style="font-size:1.4rem;font-weight:800;margin-top:6px">${m.rotulo}<br><span style="font-size:.8rem;font-weight:600;color:var(--muted)">2026</span></div>`;
+  const mg=el('div','monthgrid');
+  meses.forEach((x,i)=>{const b=el('button',i===mesSel?'on':'',x.rotulo); b.onclick=()=>{mesSel=i; render();}; mg.append(b);});
+  t7.append(mg); g.append(t7);
+
+  // 8. meta aniversário
+  const pctPago=a.pago/a.orcado*100;
+  const t8=el('div','tile c4',`<div class="th">Meta do aniversário · pagamento</div>
+    <div style="font-size:1.4rem;font-weight:800;margin-top:8px" class="tnum">${BRL0(a.pago)} <span style="font-size:.9rem;color:var(--muted)">/ ${BRL0(a.orcado)}</span></div>
+    <div class="goalbar"><i style="width:${pctPago}%;background:var(--azul)"></i><i style="flex:1;background:var(--laranja)"></i></div>
+    <div class="gli"><span style="color:var(--azul)">● <b>${Math.round(pctPago)}%</b> pago</span><span style="color:var(--laranja)"><b>${Math.round(100-pctPago)}%</b> falta ●</span></div>`);
+  t8.style.justifyContent='center'; g.append(t8);
+
+  // 9. fontes de entrada
+  const t9=el('div','tile c4'); t9.innerHTML=`<h2 style="font-size:1rem;margin-bottom:8px">Fontes de entrada · ${P.nome}</h2>`;
+  const cores=['var(--azul)','var(--laranja)','var(--roxo)','var(--cian)'];
+  const parts=v.entradas.map((e,i)=>({label:e.motivo,val:e.valor,color:cores[i%4]}));
+  const row=el('div'); row.style.cssText='display:flex;gap:16px;align-items:center;flex-wrap:wrap'; row.innerHTML=donut(parts);
+  const leg=el('div'); leg.style.cssText='flex:1;min-width:120px;display:flex;flex-direction:column;gap:7px';
+  parts.forEach(p=>leg.innerHTML+=`<div style="display:flex;justify-content:space-between;gap:8px;font-size:.82rem"><span style="display:flex;align-items:center;gap:7px;min-width:0"><span style="width:10px;height:10px;border-radius:3px;background:${p.color};flex:none"></span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.label}</span></span><b class="tnum" style="flex:none">${BRL0(p.val)}</b></div>`);
+  row.append(leg); t9.append(row); g.append(t9);
+
+  // 10-13. gastos: 3 fixos da casa + total de cartões (linha de 4)
+  const metade=visao!=='familia'?' (½)':'';
+  const nomeFix=mm=>/alug/i.test(mm)?'Aluguel':/creche/i.test(mm)?'Creche':'Celular';
+  v.saidas.filter(s=>s.tipo==='casa').forEach(f=>g.append(el('div','tile c3 mini',
+    `<div class="mi" style="background:${catColor(f.motivo)}">${sic(catIcon(f.motivo))}</div>
+     <div><div class="ml">${nomeFix(f.motivo)}${metade}</div><div class="mvv tnum">${BRL0(f.valor)}</div></div>`)));
+  const cartTot=v.saidas.filter(s=>s.tipo==='cartao').reduce((a,b)=>a+b.valor,0);
+  g.append(el('div','tile c3 mini',
+    `<div class="mi" style="background:var(--roxo)">${sic(ICON.cartao)}</div>
+     <div><div class="ml">Cartões ${visao==='familia'?'(H+A)':''}</div><div class="mvv tnum">${BRL0(cartTot)}</div></div>`));
+
+  // 12. festa destaque
+  g.append(el('div','tile festa c6',`<div class="th">Aniversário da Maitê</div>
+    <div class="push" style="padding-top:24px"><div class="big tnum">${a.n_adultos_lista+a.n_criancas}</div>
+    <div style="font-size:.9rem;color:rgba(255,255,255,.9);margin-top:6px">convidados na lista</div>
+    <div style="font-size:.78rem;color:rgba(255,255,255,.75);margin-top:10px">${a.n_criancas} crianças · ${a.comida.length} itens no cardápio · ${BRL0(a.total_comida)} em salgados</div></div>`));
+
+  // 13. gastos aniversário
+  const t13=el('div','tile c6'); t13.innerHTML=`<h2 style="font-size:1rem">Aniversário da Maitê</h2><div class="th" style="margin-bottom:0;margin-top:2px">Principais gastos da festa</div>`;
+  const alist=el('div','aniv-list');
+  [...a.itens].sort((x,y)=>y.valor-x.valor).slice(0,6).forEach(it=>alist.innerHTML+=`<div class="al"><b class="tnum">${BRL0(it.valor)}</b><span>${it.item}</span></div>`);
+  t13.append(alist);
+  t13.append(el('div',null,`<div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:.78rem;color:var(--muted)">Pago ${BRL0(a.pago)} · falta ${BRL0(a.falta)} de ${BRL0(a.orcado)} orçados.</div>`));
+  g.append(t13);
+}
+</script>
+
+</body>
+</html>
