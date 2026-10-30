@@ -27,7 +27,7 @@ module.exports = async (req, res) => {
   }
   try {
     const { google } = require("googleapis");
-    const cred = JSON.parse(Buffer.from(sa, "base64").toString("utf8"));
+    let cred; try { cred = JSON.parse(sa); } catch (e) { cred = JSON.parse(Buffer.from(sa, "base64").toString("utf8")); }
     const auth = new google.auth.JWT(cred.client_email, null, cred.private_key, ["https://www.googleapis.com/auth/drive.readonly"]);
     const drive = google.drive({ version: "v3", auth });
     // pega o arquivo com aquele nome, o mais recente por modifiedTime (ID novo não atrapalha)
