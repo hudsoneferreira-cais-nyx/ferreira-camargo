@@ -20,7 +20,14 @@ module.exports = async (req, res) => {
     } catch (e) { res.statusCode = 200; return res.end(JSON.stringify({ ok: false, erros: ["erro local: " + e.message] })); }
   }
 
-  const folderId = process.env.DRIVE_FOLDER_ID, fileName = process.env.DRIVE_FILE_NAME, sa = process.env.GOOGLE_SA_JSON;
+  const folderId = process.env.DRIVE_FOLDER_ID, fileName = process.env.DRIVE_FILE_NAME;
+  // credencial: ou GOOGLE_SA_JSON inteira, ou em pedaços GOOGLE_SA_B64_1, _2, ... (p/ contornar limite de colagem)
+  let sa = process.env.GOOGLE_SA_JSON;
+  if (!sa) {
+    const partes = [];
+    for (let i = 1; i <= 30; i++) { const p = process.env["GOOGLE_SA_B64_" + i]; if (p) partes.push(p.replace(/\s+/g, "")); }
+    if (partes.length) sa = partes.join("");
+  }
   if (!folderId || !fileName || !sa) {
     res.statusCode = 200;
     return res.end(JSON.stringify({ ok: false, erros: ["integração com o Google Drive ainda não configurada"] }));
