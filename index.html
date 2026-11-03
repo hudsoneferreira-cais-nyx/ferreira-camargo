@@ -464,8 +464,8 @@
       $('sync-date').textContent=d.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'})+' '+d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}); }
   }
 
-  try{var snap=JSON.parse(localStorage.getItem('fc_snap')||'null'); if(snap&&snap.DADOS){DADOS=snap.DADOS;mes=snap.mes;SYNC.em=snap.em;}}catch(e){}
-  function salvarSnap(){try{localStorage.setItem('fc_snap',JSON.stringify({DADOS:DADOS,mes:mes,em:SYNC.em}));}catch(e){}}
+  try{var snap=JSON.parse(localStorage.getItem('fc_snap')||'null'); if(snap&&snap.v===3&&snap.DADOS&&snap.DADOS.D){DADOS=snap.DADOS;mes=snap.mes;SYNC.em=snap.em;}}catch(e){DADOS=null;}
+  function salvarSnap(){try{localStorage.setItem('fc_snap',JSON.stringify({v:3,DADOS:DADOS,mes:mes,em:SYNC.em}));}catch(e){}}
 
   function sincronizar(){
     fetch('/api/dados',{headers:{accept:'application/json'},cache:'no-store'})
@@ -479,7 +479,7 @@
           if(!mes || DADOS.meses.indexOf(mes)<0) mes=DADOS.meses[DADOS.meses.length-1];
           SYNC.em=novo||new Date().toISOString(); SYNC.erro=null; SYNC.arquivo=r.arquivo&&r.arquivo.nome;
           salvarSnap();
-          if(mudou) render(); else atualizarSyncUI();
+          if(mudou){ try{render();}catch(e){ atualizarSyncUI(); } } else atualizarSyncUI();
         } else { SYNC.erro=(r&&r.erros&&r.erros[0])||'planilha incompatível'; if(DADOS) atualizarSyncUI(); else atualizarSyncUI(); }
       })
       .catch(function(e){ if(e!=='auth'){ SYNC.erro='sem conexão'; atualizarSyncUI(); } });
@@ -499,7 +499,7 @@
   $('viz').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;viz=b.dataset.v;[].forEach.call(this.children,function(c){c.classList.toggle('on',c===b);});astats();area();});
   $('cards-list').addEventListener('click',function(e){var a=e.target.closest('.acc');if(!a)return;var i=+a.getAttribute('data-i');if(i===cartaoSel)return;cartaoSel=i;cardsList();});
 
-  if(DADOS){ if(!mes)mes=DADOS.meses[DADOS.meses.length-1]; render(); }
+  if(DADOS){ try{ if(!mes||DADOS.meses.indexOf(mes)<0)mes=DADOS.meses[DADOS.meses.length-1]; render(); }catch(e){ DADOS=null; } }
   sincronizar();
   setInterval(sincronizar, 60000);
   document.addEventListener('visibilitychange',function(){ if(!document.hidden) sincronizar(); });
